@@ -1,8 +1,9 @@
 # Solar-PV
-HEAD
-main doc
+Software Package for visualizing and analyzing efficiency of solar panel modules based on location, efficiency, cost and module tech.
 
-some random text
-cf6e05316d1929928de4adff779c22bb18ae5c66
 
-more from fork
+### Software Dependecies
+-- Python 3
+-- geocoder
+
+
