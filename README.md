@@ -3,7 +3,25 @@ Software Package for visualizing and analyzing efficiency of solar panel modules
 
 
 ### Software Dependecies
--- Python 3
--- geocoder
+- Python 3
+- geocoder
+
+
+
+## How To Install
+
+
+
+
+
+## How To Run
+
+
+
+### Running Tests
+
+
+
+### Data Info
 
 
