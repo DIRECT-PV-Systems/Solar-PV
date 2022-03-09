@@ -11,6 +11,8 @@ Analysis of efficiency with nameplate capacity to give clients an idea of the nu
 - Python 3
 - geocoder
 - sklearn
+- keras
+- tensorflow
 
 
 
