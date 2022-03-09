@@ -9,7 +9,8 @@ Cost analysis will also take place for purchasers of PV modules. How the module 
 
 ### Software Dependecies
 - Python 3
-- geocoder
+- geopy
+- folium
 - sklearn
 - keras
 - tensorflow
