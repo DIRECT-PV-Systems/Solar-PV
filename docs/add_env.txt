@@ -1,0 +1,4 @@
+  conda activate py37
+  conda export
+  conda env export --no-builds > environment.yml
+  git add environment.yml
