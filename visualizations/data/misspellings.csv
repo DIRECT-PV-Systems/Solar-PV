@@ -1,0 +1,133 @@
+[city_state_country    Suprise, AZ, USA
+Name: 105, dtype: object, city_state_country    Surpise, AZ, USA
+Name: 109, dtype: object, city_state_country    Peroria, AZ, USA
+Name: 110, dtype: object, city_state_country    Cordes Lake, AZ, USA
+Name: 113, dtype: object, city_state_country    Suncity West, AZ, USA
+Name: 114, dtype: object, city_state_country    Litchfieldpark, AZ, USA
+Name: 118, dtype: object, city_state_country    Pirtville, AZ, USA
+Name: 125, dtype: object, city_state_country    Wahweap - Seligman, AZ, USA
+Name: 134, dtype: object, city_state_country    Blackcanyon Ci, AZ, USA
+Name: 135, dtype: object, city_state_country    Black Canyon Ci, AZ, USA
+Name: 136, dtype: object, city_state_country    Pheonix, AZ, USA
+Name: 139, dtype: object, city_state_country    Prescott Valey, AZ, USA
+Name: 142, dtype: object, city_state_country    Blackcanyoncity, AZ, USA
+Name: 143, dtype: object, city_state_country    Schottsdale, AZ, USA
+Name: 144, dtype: object, city_state_country    Precott, AZ, USA
+Name: 154, dtype: object, city_state_country    Cornvile, AZ, USA
+Name: 156, dtype: object, city_state_country    Scottdale, AZ, USA
+Name: 159, dtype: object, city_state_country    Prescott - Misc Towns, AZ, USA
+Name: 160, dtype: object, city_state_country    Littlefield Park, AZ, USA
+Name: 161, dtype: object, city_state_country    Whittmann, AZ, USA
+Name: 169, dtype: object, city_state_country    Dewey-Humbolt, AZ, USA
+Name: 173, dtype: object, city_state_country    Surprise Arizon, AZ, USA
+Name: 179, dtype: object, city_state_country    Coolige, AZ, USA
+Name: 183, dtype: object, city_state_country    Chine Valley, AZ, USA
+Name: 188, dtype: object, city_state_country    Whittman, AZ, USA
+Name: 193, dtype: object, city_state_country    Perioa, AZ, USA
+Name: 197, dtype: object, city_state_country    Youngstown, AZ, USA
+Name: 201, dtype: object, city_state_country    Petrified Forst Natl Pk, AZ, USA
+Name: 208, dtype: object, city_state_country    Petrified Forest Natl Pk, AZ, USA
+Name: 210, dtype: object, city_state_country    Desert Hot Springs, AZ, USA
+Name: 213, dtype: object, city_state_country    Stafford Spgs, CT, USA
+Name: 579, dtype: object, city_state_country    Grizwold, CT, USA
+Name: 638, dtype: object, city_state_country    Lichfield, CT, USA
+Name: 672, dtype: object, city_state_country    Brookfld, CT, USA
+Name: 673, dtype: object, city_state_country    New Britian, CT, USA
+Name: 696, dtype: object, city_state_country    Thornaston, CT, USA
+Name: 715, dtype: object, city_state_country    Bridgetport, CT, USA
+Name: 726, dtype: object, city_state_country    Seymomur, CT, USA
+Name: 728, dtype: object, city_state_country    Farmigton, CT, USA
+Name: 732, dtype: object, city_state_country    Rockyhill, CT, USA
+Name: 739, dtype: object, city_state_country    Greewich, CT, USA
+Name: 740, dtype: object, city_state_country    Guillford, CT, USA
+Name: 742, dtype: object, city_state_country    Norwallk, CT, USA
+Name: 745, dtype: object, city_state_country    Nowalk, CT, USA
+Name: 746, dtype: object, city_state_country    Nagatuck, CT, USA
+Name: 751, dtype: object, city_state_country    Miford, CT, USA
+Name: 753, dtype: object, city_state_country    Willimatic, CT, USA
+Name: 755, dtype: object, city_state_country    Straford, CT, USA
+Name: 764, dtype: object, city_state_country    Planville, CT, USA
+Name: 775, dtype: object, city_state_country    Chesire, CT, USA
+Name: 779, dtype: object, city_state_country    Ne w Haven, CT, USA
+Name: 791, dtype: object, city_state_country    Daielson, CT, USA
+Name: 795, dtype: object, city_state_country    Plainville Road, CT, USA
+Name: 801, dtype: object, city_state_country    Niantc, CT, USA
+Name: 806, dtype: object, city_state_country    Winsdor, CT, USA
+Name: 814, dtype: object, city_state_country    Mossup, CT, USA
+Name: 818, dtype: object, city_state_country    Harwington, CT, USA
+Name: 820, dtype: object, city_state_country    Trumbul, CT, USA
+Name: 825, dtype: object, city_state_country    Bloomfiled, CT, USA
+Name: 839, dtype: object, city_state_country    Colcheser, CT, USA
+Name: 840, dtype: object, city_state_country    Wethesfield, CT, USA
+Name: 841, dtype: object, city_state_country    Quakerhill, CT, USA
+Name: 851, dtype: object, city_state_country    Brookfiled, CT, USA
+Name: 857, dtype: object, city_state_country    Bloomfied, CT, USA
+Name: 860, dtype: object, city_state_country    Chestire, CT, USA
+Name: 866, dtype: object]
+881
+[city_state_country    Suprise, AZ, USA
+Name: 105, dtype: object, city_state_country    Surpise, AZ, USA
+Name: 109, dtype: object, city_state_country    Peroria, AZ, USA
+Name: 110, dtype: object, city_state_country    Cordes Lake, AZ, USA
+Name: 113, dtype: object, city_state_country    Suncity West, AZ, USA
+Name: 114, dtype: object, city_state_country    Litchfieldpark, AZ, USA
+Name: 118, dtype: object, city_state_country    Pirtville, AZ, USA
+Name: 125, dtype: object, city_state_country    Wahweap - Seligman, AZ, USA
+Name: 134, dtype: object, city_state_country    Blackcanyon Ci, AZ, USA
+Name: 135, dtype: object, city_state_country    Black Canyon Ci, AZ, USA
+Name: 136, dtype: object, city_state_country    Pheonix, AZ, USA
+Name: 139, dtype: object, city_state_country    Prescott Valey, AZ, USA
+Name: 142, dtype: object, city_state_country    Blackcanyoncity, AZ, USA
+Name: 143, dtype: object, city_state_country    Schottsdale, AZ, USA
+Name: 144, dtype: object, city_state_country    Precott, AZ, USA
+Name: 154, dtype: object, city_state_country    Cornvile, AZ, USA
+Name: 156, dtype: object, city_state_country    Scottdale, AZ, USA
+Name: 159, dtype: object, city_state_country    Prescott - Misc Towns, AZ, USA
+Name: 160, dtype: object, city_state_country    Littlefield Park, AZ, USA
+Name: 161, dtype: object, city_state_country    Whittmann, AZ, USA
+Name: 169, dtype: object, city_state_country    Dewey-Humbolt, AZ, USA
+Name: 173, dtype: object, city_state_country    Surprise Arizon, AZ, USA
+Name: 179, dtype: object, city_state_country    Coolige, AZ, USA
+Name: 183, dtype: object, city_state_country    Chine Valley, AZ, USA
+Name: 188, dtype: object, city_state_country    Whittman, AZ, USA
+Name: 193, dtype: object, city_state_country    Perioa, AZ, USA
+Name: 197, dtype: object, city_state_country    Youngstown, AZ, USA
+Name: 201, dtype: object, city_state_country    Petrified Forst Natl Pk, AZ, USA
+Name: 208, dtype: object, city_state_country    Petrified Forest Natl Pk, AZ, USA
+Name: 210, dtype: object, city_state_country    Desert Hot Springs, AZ, USA
+Name: 213, dtype: object, city_state_country    Stafford Spgs, CT, USA
+Name: 579, dtype: object, city_state_country    Grizwold, CT, USA
+Name: 638, dtype: object, city_state_country    Lichfield, CT, USA
+Name: 672, dtype: object, city_state_country    Brookfld, CT, USA
+Name: 673, dtype: object, city_state_country    New Britian, CT, USA
+Name: 696, dtype: object, city_state_country    Thornaston, CT, USA
+Name: 715, dtype: object, city_state_country    Bridgetport, CT, USA
+Name: 726, dtype: object, city_state_country    Seymomur, CT, USA
+Name: 728, dtype: object, city_state_country    Farmigton, CT, USA
+Name: 732, dtype: object, city_state_country    Rockyhill, CT, USA
+Name: 739, dtype: object, city_state_country    Greewich, CT, USA
+Name: 740, dtype: object, city_state_country    Guillford, CT, USA
+Name: 742, dtype: object, city_state_country    Norwallk, CT, USA
+Name: 745, dtype: object, city_state_country    Nowalk, CT, USA
+Name: 746, dtype: object, city_state_country    Nagatuck, CT, USA
+Name: 751, dtype: object, city_state_country    Miford, CT, USA
+Name: 753, dtype: object, city_state_country    Willimatic, CT, USA
+Name: 755, dtype: object, city_state_country    Straford, CT, USA
+Name: 764, dtype: object, city_state_country    Planville, CT, USA
+Name: 775, dtype: object, city_state_country    Chesire, CT, USA
+Name: 779, dtype: object, city_state_country    Ne w Haven, CT, USA
+Name: 791, dtype: object, city_state_country    Daielson, CT, USA
+Name: 795, dtype: object, city_state_country    Plainville Road, CT, USA
+Name: 801, dtype: object, city_state_country    Niantc, CT, USA
+Name: 806, dtype: object, city_state_country    Winsdor, CT, USA
+Name: 814, dtype: object, city_state_country    Mossup, CT, USA
+Name: 818, dtype: object, city_state_country    Harwington, CT, USA
+Name: 820, dtype: object, city_state_country    Trumbul, CT, USA
+Name: 825, dtype: object, city_state_country    Bloomfiled, CT, USA
+Name: 839, dtype: object, city_state_country    Colcheser, CT, USA
+Name: 840, dtype: object, city_state_country    Wethesfield, CT, USA
+Name: 841, dtype: object, city_state_country    Quakerhill, CT, USA
+Name: 851, dtype: object, city_state_country    Brookfiled, CT, USA
+Name: 857, dtype: object, city_state_country    Bloomfied, CT, USA
+Name: 860, dtype: object, city_state_country    Chestire, CT, USA
+Name: 866, dtype: object, city_state_country    STAFFORD SPGS, CT, USA
