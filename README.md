@@ -31,5 +31,5 @@ Cost analysis will also take place for purchasers of PV modules. How the module 
 
 
 ### Data Info
-
+The data was taken from "The Berkley "Tracking the Sun" Project". We collaboratively parsed down the data and selected the appropriate factors and locations so that we had valid input data. Some locations were repeated and so we cut some to save on computation costs. 
 
