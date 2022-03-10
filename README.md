@@ -1,7 +1,7 @@
 # Solar-PV
 Software Package for visualizing and analyzing efficiency of solar panel modules based on location, efficiency, cost and module tech.
 
-The geocode visualization helps the clients geographically compare the various factors we have analyzed. Color coding, legends and labels will aid the clients in clearly seeing trends. 
+The geocode visualization helps the clients geographically compare the various factors we have analyzed. Color coding, legends and labels will aid the clients in clearly seeing trends. Zip code data was converted to Latitude and Longitude. 
 
 Analysis of efficiency with nameplate capacity to give clients an idea of the numerical and statistical correlations. There is first some simple scatter plots to show a basic visualization, and then a regression model fitted. Additional plots are included showing how other factors are uncorrelated. Then a Decision Tree and Simple Neural Network to give some more robust ML analysis. This section of our package is designed for specifically investors, who are most concerned with how well the PV modules work in different places. 
 
