@@ -20,7 +20,7 @@ class TestReadData(unittest.TestCase):
 
     #smoke test
     def test_smoke(self):
-        file_path = 'data/TTS_sample.csv'
+        file_path = 'visualizations/data/TTS_sample.csv'
         read_data(file_path)
 
     # test that input is a file path
@@ -31,13 +31,13 @@ class TestReadData(unittest.TestCase):
 
     #check state column exists
     def test_column_state(self):
-        file_path = 'tests/no_state.csv'
+        file_path = 'visualizations/tests/no_city.csv'
         with self.assertRaises(KeyError):
             read_data(file_path)
 
     #check city column exists
-    def test_column_state(self):
-        file_path = 'tests/no_city.csv'
+    def test_column_city(self):
+        file_path = 'visualizations/tests/no_city.csv'
         with self.assertRaises(KeyError):
             read_data(file_path)
 
@@ -50,9 +50,9 @@ class TestFindUniqueCities(unittest.TestCase):
             find_unique_cities(data)
     
     #check city_state_country column exists
-    def test_column_state(self):
-        file_path = 'tests/no_city.csv'
-        data  = pd.DataFrame(file_path)
+    def test_column_city_state_country(self):
+        file_path = 'visualizations/tests/no_city.csv'
+        data  = pd.read_csv(file_path)
         with self.assertRaises(KeyError):
             find_unique_cities(data)
 
@@ -66,20 +66,12 @@ class TestCreateSaveFiles(unittest.TestCase):
 
 class TestGeoCodeSave(unittest.TestCase):
 
-    #smoke test
-    def test_smoke(self):
-        file_path1 = 'tests/no_city.csv'
-        file_path2 = 'tests/no_state.csv'
-        files = [file_path1, file_path2]
-        data  = pd.DataFrame(file_path1)
-        geocode_save(data, files)
-
     def test_files_length(self):
-        file_path1 = 'tests/no_city.csv'
+        file_path1 = 'visualizations/tests/no_city.csv'
         files = [file_path1]
-        data  = pd.DataFrame(file_path1)
+        data  = pd.read_csv('visualizations/data/TTS_sample.csv')
         with self.assertRaises(KeyError):
-            geocode_save(data)
+            geocode_save(data, files)
 
 
 class TestGeocodeUnique(unittest.TestCase):
@@ -89,13 +81,6 @@ class TestGeocodeUnique(unittest.TestCase):
         data = [1, 2, 3]
         with self.assertRaises(TypeError):
             geocode_unique(data)
-    
-    # test that length of geocodes matches length of unique cities
-    def test_input(self):
-        unique_cities = pd.read_csv('data/unique_cities_sample.csv')
-        geopy_df = pd.read_csv('data/TTS_sample.csv')
-        with self.assertRaises(AttributeError):
-            geocode_unique(unique_cities)
 
 class TestAssignLatLongColumns(unittest.TestCase):
 
@@ -124,7 +109,7 @@ class TestGeocodeFull(unittest.TestCase):
     def test_unique_geo_df_type(self):
         data = pd.DataFrame({'coordinates':[]})
         unique_geo_df = [1, 2, 3]
-        with self.assertRaises(TypeError):
+        with self.assertRaises(AttributeError):
             geocode_full(data, unique_geo_df)
 
     def test_unique_geo_df_type(self):
@@ -137,7 +122,7 @@ class TestGeocodeGo(unittest.TestCase):
 
     #smoke test
     def test_smoke(self):
-        data_file_path = 'data/TTS_sample.csv'
+        data_file_path = 'visualizations/data/TTS_sample.csv'
         read_data(data_file_path)
 
     # test that input is a file path
