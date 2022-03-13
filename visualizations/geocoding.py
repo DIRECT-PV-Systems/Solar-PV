@@ -7,12 +7,18 @@ import ast
 import geopy
 from geopy.geocoders import Nominatim
 locator = Nominatim(user_agent= 'starczyn@uw.edu') #change this at the end
-#nominatim limits geocoding extracts to one per second
+#Nominatim limits geocoding extracts to one per second
 from geopy.extra.rate_limiter import RateLimiter
 geocode = RateLimiter(locator.geocode, min_delay_seconds=1)
 
 def read_data(file_path):
-    
+
+    """
+    Creates pandas dataframe from .csv in path specified
+    Assumes city, state are columns in file
+    Adds 'city_state_country' column to improve geocoding
+    :param .csv file_path: file path of .csv data
+    """
     #reading in the dataset
     data = pd.read_csv(file_path)
     #adding a column to make the location more compatible with geopy and reduce mislocating
@@ -20,32 +26,50 @@ def read_data(file_path):
     return data
 
 def find_unique_cities(data):
+    """
+    Creates pandas dataframe of unique locations
+    Sends unique cities to a .csv for reference
+    :param dataframe-pandas data: dataframe containing locations
+    """
     #create a dataframe of unique locations
     unique_data = data['city_state_country'].unique()
     unique_cities = pd.DataFrame(data = unique_data, columns = ['city_state_country'])
     #send the results to a csv for reference
-    unqiue_cities_csv = pd.DataFrame.to_csv(unique_cities, '/home/starczyn/Solar-PV/visualizations/data/unique_cities_sample.csv')
+    unqiue_cities_csv = pd.DataFrame.to_csv(unique_cities, 
+    '/home/starczyn/Solar-PV/visualizations/data/unique_cities_sample.csv')
     return unique_cities
 
 def create_save_files():
-    #create the blank csv, only run once
-
+    """
+    Creates csv files to save geocoding and location that produce error with Nominatim
+    This should only be run if a blank csvs are needed
+    """
+    #geopy csv
     f = open("/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv", "w")
     writer = csv.DictWriter(f, fieldnames= ['geopy location', 'coordinates'])
     writer.writeheader()
     f.close()
 
+    #csv of locations that produce erros
     f = open("/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv", "w")
     writer = csv.DictWriter(f, fieldnames= ['location'])
     writer.writeheader()
     f.close()
 
+#store csvs for geocoding
 geocode_unique_csv = '/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv'
 error_cities_csv = "/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv"
 
 files = [geocode_unique_csv, error_cities_csv]
 
-def geocode_save(row, file = files): #row is pandas series: index in dataframe and value of column at the row
+def geocode_save(row, file = files):
+
+    """
+    Saves each geocoded location to the csv file
+    Sends unique cities to a .csv for reference
+    :param series-pandas row: row of pandas dataframe
+    :param array-files file: array of files
+    """
 
     current_csv = pd.read_csv(file[0], index_col = 0)
     
@@ -92,6 +116,15 @@ def geocode_save(row, file = files): #row is pandas series: index in dataframe a
             return "({},{})".format('nan','nan')
 
 def geocode_unique(unique_cities):
+    
+    """
+    Iterates through each unique city to assign geocoding
+    Sends complete geopy locations to a .csv file for reference
+    Concatonates geopy locations with unique location dataframe
+    Sends concatonation to a .csv for reference
+    Returns a dataframe of unique locations geocoded
+    :param dataframe-pandas unique_cities: dataframe containing unique locations
+    """
 
     for idx, row in unique_cities.iterrows():
         geocode_save(row)
@@ -106,6 +139,10 @@ def geocode_unique(unique_cities):
     return unique_geo_df
 
 def assign_lat_long_columns(unique_geo_df):
+    """
+    Creates seperate columns for latitude and longitude from geopy location
+    :param dataframe-pandas unique_geo_df: dataframe containing unique locations
+    """
 
     for idx, row in unique_geo_df.iterrows():
         try: 
@@ -120,6 +157,13 @@ def assign_lat_long_columns(unique_geo_df):
     return unique_geo_df
 
 def geocode_full(data, unique_geo_df):
+
+    """
+    Uses the geocodes of unique cities to geocode the full dataframe
+    :param dataframe-pandas data: dataframe to be geocoded
+    :param dataframe-pandas unique_geo_df: dataframe of unique cities geocoded
+
+    """
 
     for idx1, row in data.iterrows():
         try:
@@ -137,6 +181,12 @@ def geocode_full(data, unique_geo_df):
     return data
 
 def geocode_go(data_file_path):
+    
+    """
+    Geocodes in one go based on the file path of the data to be geocoded 
+    :param filepath-csv data_file_path): location .csv to be geocoded
+
+    """
 
     data = read_data(data_file_path)
     unique_cities = find_unique_cities(data)
