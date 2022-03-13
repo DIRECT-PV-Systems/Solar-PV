@@ -40,6 +40,11 @@ def create_save_files():
     writer.writeheader()
     f.close()
 
+geocode_unique_csv = '/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv'
+error_cities_csv = "/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv"
+
+files = [geocode_unique_csv, error_cities_csv]
+
 def geocode_save(row, file = files): #row is pandas series: index in dataframe and value of column at the row
 
     current_csv = pd.read_csv(file[0], index_col = 0)
@@ -99,6 +104,38 @@ def geocode_unique(unique_cities):
     '/home/starczyn/Solar-PV/visualizations/data/unique_cities_geocoded_sample.csv' )
 
     return unique_geo_df
+
+def assign_lat_long_columns(unique_geo_df):
+
+    for idx, row in unique_geo_df.iterrows():
+        try: 
+            point = ast.literal_eval(unique_geo_df['coordinates'].iloc[idx])
+            latitude, longitude = point
+            unique_geo_df.loc[idx,'latitude'] = latitude
+            unique_geo_df.loc[idx,'longitude'] = longitude
+        except:
+            unique_geo_df.loc[idx,'latitude'] = np.nan
+            unique_geo_df.loc[idx,'longitude'] = np.nan
+
+    return unique_geo_df
+
+def geocode_full(data, unique_geo_df):
+
+    for idx1, row in data.iterrows():
+        try:
+            city = row['city_state_country']
+            idx2 = unique_geo_df['city_state_country'].str.contains(city, na = False)
+            latitude = unique_geo_df.loc[idx2,'latitude'].values[0]
+            longitude = unique_geo_df.loc[idx2,'longitude'].values[0]
+            data.loc[idx1, 'latitude'] = latitude
+            data.loc[idx1, 'longitude'] = longitude
+
+        except: 
+            data.loc[idx1, 'latitude'] = np.nan
+            data.loc[idx1, 'longitude'] = np.nan
+            
+    return data
+
             
           
 
