@@ -15,33 +15,29 @@ geocode = RateLimiter(locator.geocode, min_delay_seconds=1)
 
 
 class TestReadData(unittest.TestCase):
-    df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-    df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
 
+    #smoke test
     def test_smoke(self):
-        # smoke test
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-        df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
-        knn_wrap(df1, 5, df2)
+        file_path = 'data/TTS_sample.csv'
+        read_data(file_path)
 
-    # test for correct inputs
-    def test_type1(self):
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
+    # test that input is a file path
+    def test_input(self):
+        file_path = pd.DataFrame([1, 2, 3])
         with self.assertRaises(TypeError):
-            knn_wrap(np.array([1, 2]), 5, df1)
+            read_data(file_path)
 
-    def test_type2(self):
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-        df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
-        with self.assertRaises(TypeError):
-            knn_wrap(df2, 'ten', df1)
+    #check state column exists
+    def test_column_state(self):
+        file_path = 'tests/no_state.csv'
+        with self.assertRaises(KeyError):
+            read_data(file_path)
 
-    def test_type3(self):
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-        df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
-        with self.assertRaises(TypeError):
-            knn_wrap(df2, 'ten', df1)
-
+    #check city column exists
+    def test_column_state(self):
+        file_path = 'tests/no_city.csv'
+        with self.assertRaises(KeyError):
+            read_data(file_path)
 
 class TestFindUniqueCities(unittest.TestCase):
 

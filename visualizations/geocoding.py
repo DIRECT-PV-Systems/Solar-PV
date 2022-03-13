@@ -17,10 +17,28 @@ def read_data(file_path):
     Creates pandas dataframe from .csv in path specified
     Assumes city, state are columns in file
     Adds 'city_state_country' column to improve geocoding
-    :param .csv file_path: file path of .csv data
+    :param str file_path: file path of .csv data
     """
+
+    #check that file path is a string
+    if not isinstance(file_path, str):
+        raise TypeError('File path must be a string.')
+
     #reading in the dataset
     data = pd.read_csv(file_path)
+
+    #check that 'state' column exists in the dataset
+    if 'state' in data.columns:
+        pass
+    else:
+        raise KeyError('File must contain a state column')
+
+    #check that 'hostCustomerCity' column exists in the dataset
+    if 'hostCustomerCity' in data.columns:
+        pass
+    else:
+        raise KeyError('File must contain a hostCustomerCity column')
+
     #adding a column to make the location more compatible with geopy and reduce mislocating
     data['city_state_country'] = data['hostCustomerCity'] + ', ' + data['state'] + ', USA'
     return data
