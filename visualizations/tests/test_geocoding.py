@@ -10,7 +10,7 @@ import geopy
 from geopy.geocoders import Nominatim
 
 from visualizations.geocoding import assign_lat_long_columns, create_save_files, find_unique_cities, geocode_full, geocode_save, geocode_unique, read_data
-locator = Nominatim(user_agent= 'starczyn@uw.edu') #change this at the end
+locator = Nominatim(user_agent= 'your email')
 #Nominatim limits geocoding extracts to one per second
 from geopy.extra.rate_limiter import RateLimiter
 geocode = RateLimiter(locator.geocode, min_delay_seconds=1)

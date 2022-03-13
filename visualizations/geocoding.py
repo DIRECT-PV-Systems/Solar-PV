@@ -6,7 +6,7 @@ import ast
 #geocoding packages and functions
 import geopy
 from geopy.geocoders import Nominatim
-locator = Nominatim(user_agent= 'starczyn@uw.edu') #change this at the end
+locator = Nominatim(user_agent= 'your email')
 #Nominatim limits geocoding extracts to one per second
 from geopy.extra.rate_limiter import RateLimiter
 geocode = RateLimiter(locator.geocode, min_delay_seconds=1)
