@@ -49,12 +49,24 @@ def find_unique_cities(data):
     Sends unique cities to a .csv for reference
     :param dataframe-pandas data: dataframe containing locations
     """
+    #test that input is a pandas dataframe
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError('Input must be a pandas dataframe.')
+
+    #check that 'city_state_country' column exists in the dataset
+    if 'city_state_country' in data.columns:
+        pass
+    else:
+        raise KeyError('File must contain a city_state_country column')
+
     #create a dataframe of unique locations
     unique_data = data['city_state_country'].unique()
     unique_cities = pd.DataFrame(data = unique_data, columns = ['city_state_country'])
+    
     #send the results to a csv for reference
-    unqiue_cities_csv = pd.DataFrame.to_csv(unique_cities, 
+    pd.DataFrame.to_csv(unique_cities, 
     '/home/starczyn/Solar-PV/visualizations/data/unique_cities_sample.csv')
+
     return unique_cities
 
 def create_save_files():

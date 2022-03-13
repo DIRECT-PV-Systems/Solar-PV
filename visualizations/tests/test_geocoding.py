@@ -8,6 +8,8 @@ import ast
 #geocoding packages and functions
 import geopy
 from geopy.geocoders import Nominatim
+
+from visualizations.geocoding import find_unique_cities
 locator = Nominatim(user_agent= 'starczyn@uw.edu') #change this at the end
 #Nominatim limits geocoding extracts to one per second
 from geopy.extra.rate_limiter import RateLimiter
@@ -41,13 +43,18 @@ class TestReadData(unittest.TestCase):
 
 class TestFindUniqueCities(unittest.TestCase):
 
-    def test_distance_calc(self):
-        # test that the calculation is accurate
-        u = pd.DataFrame(data=(2, 3, 4, 2))
-        v = np.array((1, -2, 1, 3))
-        with self.assertRaises(ValueError):
-            get_euclidean_distance(u, v)
-            return 6
+    # test that input is a pandas dataframe
+    def test_input(self):
+        data = [1, 2, 3]
+        with self.assertRaises(TypeError):
+            find_unique_cities(data)
+    
+    #check city_state_country column exists
+    def test_column_state(self):
+        file_path = 'tests/no_city.csv'
+        data  = pd.DataFrame(file_path)
+        with self.assertRaises(KeyError):
+            find_unique_cities(data)
 
 
 class TestCreateSaveFiles(unittest.TestCase):
