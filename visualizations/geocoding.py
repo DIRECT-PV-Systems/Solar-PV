@@ -136,7 +136,18 @@ def geocode_full(data, unique_geo_df):
             
     return data
 
-            
-          
+def geocode_go(data_file_path):
 
-        
+    data = read_data(data_file_path)
+    unique_cities = find_unique_cities(data)
+    geocode_unique_csv = '/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv'
+    error_cities_csv = "/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv"
+    files = [geocode_unique_csv, error_cities_csv]
+    unique_geo_df = geocode_unique(unique_cities)
+    unique_geo_df = assign_lat_long_columns(unique_geo_df)
+    data = geocode_full(data, unique_geo_df)
+    
+    return data
+
+
+
