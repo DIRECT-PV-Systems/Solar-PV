@@ -243,7 +243,7 @@ def geocode_full(data, unique_geo_df):
             
     return data
 
-def geocode_go(data_file_path):
+def geocode_go(file_path):
     
     """
     Geocodes in one go based on the file path of the data to be geocoded 
@@ -251,10 +251,10 @@ def geocode_go(data_file_path):
 
     """
     #check that file path is a string
-    if not isinstance(data_file_path, str):
+    if not isinstance(file_path, str):
         raise TypeError('File path must be a string.')
 
-    data = read_data(data_file_path)
+    data = read_data(file_path)
     unique_cities = find_unique_cities(data)
     geocode_unique_csv = 'data/TTS_geocoded_sample.csv'
     error_cities_csv = "data/TTS_error_cities_sample.csv"
