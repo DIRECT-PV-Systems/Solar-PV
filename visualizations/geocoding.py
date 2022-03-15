@@ -6,7 +6,7 @@ import ast
 #geocoding packages and functions
 import geopy
 from geopy.geocoders import Nominatim
-locator = Nominatim(user_agent= 'starczyn@uw.edu') #change this at the end
+locator = Nominatim(user_agent= 'your email')
 #Nominatim limits geocoding extracts to one per second
 from geopy.extra.rate_limiter import RateLimiter
 geocode = RateLimiter(locator.geocode, min_delay_seconds=1)
@@ -17,10 +17,28 @@ def read_data(file_path):
     Creates pandas dataframe from .csv in path specified
     Assumes city, state are columns in file
     Adds 'city_state_country' column to improve geocoding
-    :param .csv file_path: file path of .csv data
+    :param str file_path: file path of .csv data
     """
+
+    #check that file path is a string
+    if not isinstance(file_path, str):
+        raise TypeError('File path must be a string.')
+
     #reading in the dataset
     data = pd.read_csv(file_path)
+
+    #check that 'state' column exists in the dataset
+    if 'state' in data.columns:
+        pass
+    else:
+        raise KeyError('File must contain a state column')
+
+    #check that 'hostCustomerCity' column exists in the dataset
+    if 'hostCustomerCity' in data.columns:
+        pass
+    else:
+        raise KeyError('File must contain a hostCustomerCity column')
+
     #adding a column to make the location more compatible with geopy and reduce mislocating
     data['city_state_country'] = data['hostCustomerCity'] + ', ' + data['state'] + ', USA'
     return data
@@ -31,12 +49,23 @@ def find_unique_cities(data):
     Sends unique cities to a .csv for reference
     :param dataframe-pandas data: dataframe containing locations
     """
+    #test that input is a pandas dataframe
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError('Input must be a pandas dataframe.')
+
+    #check that 'city_state_country' column exists in the dataset
+    if 'city_state_country' in data.columns:
+        pass
+    else:
+        raise KeyError('File must contain a city_state_country column')
+
     #create a dataframe of unique locations
     unique_data = data['city_state_country'].unique()
     unique_cities = pd.DataFrame(data = unique_data, columns = ['city_state_country'])
+    
     #send the results to a csv for reference
-    unqiue_cities_csv = pd.DataFrame.to_csv(unique_cities, 
-    '/home/starczyn/Solar-PV/visualizations/data/unique_cities_sample.csv')
+    pd.DataFrame.to_csv(unique_cities, 'data/unique_cities_sample.csv')
+
     return unique_cities
 
 def create_save_files():
@@ -45,20 +74,20 @@ def create_save_files():
     This should only be run if a blank csvs are needed
     """
     #geopy csv
-    f = open("/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv", "w")
+    f = open("data/TTS_geocoded_sample.csv", "w")
     writer = csv.DictWriter(f, fieldnames= ['geopy location', 'coordinates'])
     writer.writeheader()
     f.close()
 
     #csv of locations that produce erros
-    f = open("/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv", "w")
+    f = open("data/TTS_error_cities_sample.csv", "w")
     writer = csv.DictWriter(f, fieldnames= ['location'])
     writer.writeheader()
     f.close()
 
 #store csvs for geocoding
-geocode_unique_csv = '/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv'
-error_cities_csv = "/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv"
+geocode_unique_csv = 'data/TTS_geocoded_sample.csv'
+error_cities_csv = "data/TTS_error_cities_sample.csv"
 
 files = [geocode_unique_csv, error_cities_csv]
 
@@ -70,6 +99,10 @@ def geocode_save(row, file = files):
     :param series-pandas row: row of pandas dataframe
     :param array-files file: array of files
     """
+    if len(file) == 2:
+        pass
+    else:
+        raise KeyError('Two files must be passed into file array.')
 
     current_csv = pd.read_csv(file[0], index_col = 0)
     
@@ -125,16 +158,24 @@ def geocode_unique(unique_cities):
     Returns a dataframe of unique locations geocoded
     :param dataframe-pandas unique_cities: dataframe containing unique locations
     """
+    #test that input is a pandas dataframe
+    if not isinstance(unique_cities, pd.DataFrame):
+        raise TypeError('Input must be a pandas dataframe.')
 
     for idx, row in unique_cities.iterrows():
         geocode_save(row)
 
-    geopy_df = pd.read_csv('/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv')
+    geopy_df = pd.read_csv('data/TTS_geocoded_sample.csv')
+
+    if len(geopy_df) == len(unique_cities):
+        pass
+    else:
+        raise AttributeError('Length of geocodes does not match length of unique cities.')
 
     frames = [unique_cities, geopy_df]
     unique_geo_df = pd.concat(frames, axis=1, join="inner")
-    unqiue_cities_geocoded = pd.DataFrame.to_csv(unique_geo_df, 
-    '/home/starczyn/Solar-PV/visualizations/data/unique_cities_geocoded_sample.csv' )
+    pd.DataFrame.to_csv(unique_geo_df, 
+    'data/unique_cities_geocoded_sample.csv')
 
     return unique_geo_df
 
@@ -143,6 +184,17 @@ def assign_lat_long_columns(unique_geo_df):
     Creates seperate columns for latitude and longitude from geopy location
     :param dataframe-pandas unique_geo_df: dataframe containing unique locations
     """
+    #check that 'coordinates' column exists in the dataframe
+    if 'coordinates' in unique_geo_df.columns:
+        pass
+    else:
+        raise KeyError('File must contain a coordinates column')
+
+    #check that 'coordinates' column exists in the dataframe
+    if len(unique_geo_df['coordinates']) > 1:
+        pass
+    else:
+        raise AttributeError('Coordinates column must contain data.')
 
     for idx, row in unique_geo_df.iterrows():
         try: 
@@ -164,6 +216,17 @@ def geocode_full(data, unique_geo_df):
     :param dataframe-pandas unique_geo_df: dataframe of unique cities geocoded
 
     """
+    #test that input is a pandas dataframe
+    if not isinstance(data, pd.DataFrame):
+        raise TypeError('Data input must be a pandas dataframe.')
+
+    if not isinstance(unique_geo_df, pd.DataFrame):
+        raise TypeError('Data input must be a pandas dataframe.')
+
+    if len(data['city_state_country'].unique()) == len(unique_geo_df):
+        pass
+    else:
+        raise AttributeError('All unique cities in dataframe have not been geocoded.')
 
     for idx1, row in data.iterrows():
         try:
@@ -180,18 +243,21 @@ def geocode_full(data, unique_geo_df):
             
     return data
 
-def geocode_go(data_file_path):
+def geocode_go(file_path):
     
     """
     Geocodes in one go based on the file path of the data to be geocoded 
     :param filepath-csv data_file_path): location .csv to be geocoded
 
     """
+    #check that file path is a string
+    if not isinstance(file_path, str):
+        raise TypeError('File path must be a string.')
 
-    data = read_data(data_file_path)
+    data = read_data(file_path)
     unique_cities = find_unique_cities(data)
-    geocode_unique_csv = '/home/starczyn/Solar-PV/visualizations/data/TTS_geocoded_sample.csv'
-    error_cities_csv = "/home/starczyn/Solar-PV/visualizations/data/TTS_error_cities_sample.csv"
+    geocode_unique_csv = 'data/TTS_geocoded_sample.csv'
+    error_cities_csv = "data/TTS_error_cities_sample.csv"
     files = [geocode_unique_csv, error_cities_csv]
     unique_geo_df = geocode_unique(unique_cities)
     unique_geo_df = assign_lat_long_columns(unique_geo_df)

@@ -8,104 +8,125 @@ import ast
 #geocoding packages and functions
 import geopy
 from geopy.geocoders import Nominatim
-locator = Nominatim(user_agent= 'starczyn@uw.edu') #change this at the end
+
+from visualizations.geocoding import assign_lat_long_columns, create_save_files, find_unique_cities, geocode_full, geocode_save, geocode_unique, read_data
+locator = Nominatim(user_agent= 'your email')
 #Nominatim limits geocoding extracts to one per second
 from geopy.extra.rate_limiter import RateLimiter
 geocode = RateLimiter(locator.geocode, min_delay_seconds=1)
 
 
 class TestReadData(unittest.TestCase):
-    df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-    df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
 
+    #smoke test
     def test_smoke(self):
-        # smoke test
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-        df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
-        knn_wrap(df1, 5, df2)
+        file_path = 'visualizations/data/TTS_sample.csv'
+        read_data(file_path)
 
-    # test for correct inputs
-    def test_type1(self):
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
+    # test that input is a file path
+    def test_input(self):
+        file_path = pd.DataFrame([1, 2, 3])
         with self.assertRaises(TypeError):
-            knn_wrap(np.array([1, 2]), 5, df1)
+            read_data(file_path)
 
-    def test_type2(self):
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-        df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
-        with self.assertRaises(TypeError):
-            knn_wrap(df2, 'ten', df1)
+    #check state column exists
+    def test_column_state(self):
+        file_path = 'visualizations/tests/no_city.csv'
+        with self.assertRaises(KeyError):
+            read_data(file_path)
 
-    def test_type3(self):
-        df1 = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [.5, 0, .5]])
-        df2 = pd.DataFrame([[-1, 0, 5], [1, 2, -1], [.5, 0, 8]])
-        with self.assertRaises(TypeError):
-            knn_wrap(df2, 'ten', df1)
-
+    #check city column exists
+    def test_column_city(self):
+        file_path = 'visualizations/tests/no_city.csv'
+        with self.assertRaises(KeyError):
+            read_data(file_path)
 
 class TestFindUniqueCities(unittest.TestCase):
 
-    def test_distance_calc(self):
-        # test that the calculation is accurate
-        u = pd.DataFrame(data=(2, 3, 4, 2))
-        v = np.array((1, -2, 1, 3))
-        with self.assertRaises(ValueError):
-            get_euclidean_distance(u, v)
-            return 6
+    # test that input is a pandas dataframe
+    def test_input(self):
+        data = [1, 2, 3]
+        with self.assertRaises(TypeError):
+            find_unique_cities(data)
+    
+    #check city_state_country column exists
+    def test_column_city_state_country(self):
+        file_path = 'visualizations/tests/no_city.csv'
+        data  = pd.read_csv(file_path)
+        with self.assertRaises(KeyError):
+            find_unique_cities(data)
 
 
 class TestCreateSaveFiles(unittest.TestCase):
 
-    def test_inputs(self):
-        # test that inputs are of the correct size
-        x_test_row = pd.DataFrame(data=(2, 3, 4, 2))
-        X_train = pd.DataFrame([[-1, 0, 4], [1, 0, -1], [9, 0, 1]])
-        y_train = pd.DataFrame([[-1, 0, 8]])
-
-        with self.assertRaises(ValueError):
-            get_sorted_list(x_test_row, X_train, y_train, 5)
+    #smoke test
+    def test_smoke(self):
+        create_save_files()
 
 
 class TestGeoCodeSave(unittest.TestCase):
 
-    def test_x_test_input(self):
-        # test that the dataframe has the indexes of y_train
-        knn_list = pd.DataFrame(data=(2, 3, 4))
-        y_train = pd.DataFrame([[-1, 0, 3]])
-
-        with self.assertRaises(ValueError):
-            predict(knn_list, y_train)
+    def test_files_length(self):
+        file_path1 = 'visualizations/tests/no_city.csv'
+        files = [file_path1]
+        data  = pd.read_csv('visualizations/data/TTS_sample.csv')
+        with self.assertRaises(KeyError):
+            geocode_save(data, files)
 
 
 class TestGeocodeUnique(unittest.TestCase):
 
-    def test_num_modes(self):
-        # test that knn_list returns an error if only one mode exists
-        knn_list = pd.DataFrame(data={'distance': [20, 21, 19, 18],
-                                      'y_train': [20, 20, 19, 18]})
+    # test that input is a pandas dataframe
+    def test_input(self):
+        data = [1, 2, 3]
+        with self.assertRaises(TypeError):
+            geocode_unique(data)
 
-        with self.assertRaises(ValueError):
-            tie_breaker(knn_list)
+class TestAssignLatLongColumns(unittest.TestCase):
+
+    # test coordinates column exists
+    def test_column_coordinates(self):
+        unique_geo_df = pd.DataFrame({'State' == ['WA']})
+        with self.assertRaises(KeyError):
+            assign_lat_long_columns(unique_geo_df)
+
+    # test coordinates column is filled
+    def test_coordinates_filled(self):
+        unique_geo_df = pd.DataFrame({'coordinates':[]})
+        with self.assertRaises(AttributeError):
+            geocode_unique(unique_geo_df)
 
 
 class TestGeocodeFull(unittest.TestCase):
 
-    def test_k_types(self):
-        # test that k list contains only integers
-        k_list = [2, 3, 4, 5, 'R', 7]
-        df_train = pd.DataFrame(data={'random': [20, 21, 19, 18]})
-        df_test = pd.DataFrame(data={'random': [20, 20, 19, 18]})
-
+    # test that input is a pandas dataframe
+    def test_data_type(self):
+        data = [1, 2, 3]
+        unique_geo_df = pd.DataFrame({'coordinates':[]})
         with self.assertRaises(TypeError):
-            k_selection(df_train, df_test, k_list)
+            geocode_full(data, unique_geo_df)
+
+    def test_unique_geo_df_type(self):
+        data = pd.DataFrame({'coordinates':[]})
+        unique_geo_df = [1, 2, 3]
+        with self.assertRaises(AttributeError):
+            geocode_full(data, unique_geo_df)
+
+    def test_unique_geo_df_type(self):
+        data = pd.DataFrame({'city_state_country':["Washington D.C., DC, USA", "OCEANSIDE, CA, USA"]})
+        unique_geo_df = pd.DataFrame({'coordinates':["(38.8950368, -77.0365427)"]})
+        with self.assertRaises(AttributeError):
+            geocode_full(data, unique_geo_df)
 
 class TestGeocodeGo(unittest.TestCase):
 
-    def test_k_types(self):
-        # test that k list contains only integers
-        k_list = [2, 3, 4, 5, 'R', 7]
-        df_train = pd.DataFrame(data={'random': [20, 21, 19, 18]})
-        df_test = pd.DataFrame(data={'random': [20, 20, 19, 18]})
+    #smoke test
+    def test_smoke(self):
+        data_file_path = 'visualizations/data/TTS_sample.csv'
+        read_data(data_file_path)
 
+    # test that input is a file path
+    def test_input(self):
+        data_file_path = pd.DataFrame([1, 2, 3])
         with self.assertRaises(TypeError):
-            k_selection(df_train, df_test, k_list)
+            read_data(data_file_path)
