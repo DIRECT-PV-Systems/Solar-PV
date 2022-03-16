@@ -33,12 +33,24 @@ A parsed down database from the University of California-Berkely “Tracking the
 
 1.  Efficiency
 
-	   <ins> Most influential factors on efficiency</ins>: Machine learning algorithms will be employed to determine the factors that most greatly influence the efficiency of the solar cell systems. Algorithms such as multiple linear regression, K-Fold, KNN, and Random Forest can be employed to determine these factors. This information would be provided to the solar cell operating companies so these factors could be looked into more closely by their engineers.
+	   <ins> Most influential factors on efficiency</ins>: Machine learning algorithms will be employed to determine the factors that most greatly influence the efficiency of the solar cell systems. Algorithms such as linear regression, K-Fold, KNN, and Decision Trees will be employed to determine these factors. This information would be provided to the solar cell operating companies so these factors could be looked into more closely by their engineers. The Linear regression took in the Efficiency and Nameplate Capacity columns as inputs, after being split into trained and tested data and gave outputs of r^2 and MSE. The Decision Tree followed the same format, and gave outputs of loss and valueloss. 
 
-	<ins>Efficiency based on location</ins>: The highest recorded efficiency in the area would be determined along with the company name and module type. The inputs would be location (state, zip code). The code would loop through the code to find data within the same zip code, if it exists, or in the state. The highest efficiency in the area would be determined and outputted along with the corresponding company and module type. This information would be useful to the purchaser and investor users.
+	<ins>Efficiency based on location</ins>: The highest recorded efficiency in the area would be determined along with the company name and module type. The inputs would be location (state, zip code). The geocoding visualizations show some of the locational efficiencies, but using heatmaps we found that efficiency did not have a significatn correlation with latitude and longitude. This information would be useful to the purchaser and investor users.
+
+    This component enables engineers working for power companies and installers to make informed decisons on which factors most greatly affect efficiency so as to determine which areas they should focus on in deployment of solar cell systems.
 
 2.  Cost analysis
     This provides a brief overview of the associated expenses and income with implementing solar panels. The inputs would include the area (state/zip code) and available square footage. It would find the highest efficiency in the location and use that to calculate the estimated amount of electricity generation based on the approximate number of solar panels that would fit into the entered square footage. Using the average cost of electricity, the potential savings can be calculated. The manufacturing cost per square foot can be calculated by dividing the associated manufacturing cost with the highest efficiency in the area by the number of modules (or sq ft) and then multiplying by the inputted square footage (or number of modules). The outputs would be the predicted manufacturing/installation costs and the potential savings.
 
+    This use case if useful for all users who have some knowledge of python code or can use another employee to help them enalyze cost. The cost analysis will allow installers and power companies to make informed decisions on which systems have lower costs and which areas to focus on to lower cost and maintain sufficient performance.
+
 #### 3.  Visualizations
-   Using a package such as GeoPandas, our software will be able to create maps for easily comparing factors such as efficiencies, companies, module tech, etc. These maps will give Power Companies, Investors and Purchasers the ability to easily view trends, with varying degrees of technical knowledge. This will involve code to create the visualizations with graphical elements to alter specific parts such as labels, markers, color coding, legends.
+   The visualization package consits of two components: Geocoding and Map Plotting
+
+   1. Geocoding:
+   In order to plot the locations in the dataset, the city and state locations need to be converted to latitude and longitude coordinates. This program takes the entire Tracking the dataframe as an input which includes most importantly for this program, the city and state location of each datapoint. It uses a combinations of a custom python package, Geopy, and Nominatim to output a new dataframe with latitude and longitude in sepearte columns for each datapoint. A jupyter notebook walks the user through how to complete the geocoding. This makes plotting viusualizations in the next step possible.
+
+   2. Map Plotting
+   A jupyter notebook is provided to the user to teach them how to plot visualizations using a sample dataset. This component takes a .csv file from the Tracking the Sun dataset as an input and outputs density heat maps and chropleth maps related to cost and efficiency. 
+
+   The visualizations in included in the jupyter notebook are most useful for users with limited to knowledge of python to get an overall idea of the costs and efficiencies based on geographic areas of the United States. This is helpful for the investor to decide which areas would be the best to invest in based areas with high efficiencies, low cost, and potential for expansion.
