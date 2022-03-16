@@ -20,7 +20,9 @@ The data was taken from the University of California-Berkley "Tracking the Sun" 
 
 
 ## How To Install
-This repository can be forked or downloaded by the user. Since the full dataset file is too large, the full dataset is not available on GitHub. A sample subset of the data is provided. Please contact the authors if you wish to use the full dataset.
+This repository can be forked or downloaded by the user. Since the full dataset file is too large, the full dataset is not available on GitHub. A sample subset of the data is provided. Please contact the authors if you wish to use the full dataset or create your own subset of the Tracking the Sun dataset:
+
+https://emp.lbl.gov/tracking-the-sun
 
 ## How To Run
 Each Jupyter Notebook in the visualization, efficiency, and cost directories will have information on how to run the analysis software. It is important to download the corresponding .py files, which contain functions that the Jupyter Notebook will use while running. 
