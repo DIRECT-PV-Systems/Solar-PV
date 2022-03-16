@@ -33,7 +33,7 @@ A parsed down database from the University of California-Berkely “Tracking the
 
 1.  Efficiency
 
-	   <ins> Most influential factors on efficiency</ins>: Machine learning algorithms will be employed to determine the factors that most greatly influence the efficiency of the solar cell systems. Algorithms such as multiple linear regression, K-Fold, KNN, and Random Forest can be employed to determine these factors. This information would be provided to the solar cell operating companies so these factors could be looked into more closely by their engineers.
+	   <ins> Most influential factors on efficiency</ins>: Machine learning algorithms will be employed to determine the factors that most greatly influence the efficiency of the solar cell systems. Algorithms such as linear regression, K-Fold, KNN, and Decision Trees will be employed to determine these factors. This information would be provided to the solar cell operating companies so these factors could be looked into more closely by their engineers.
 
 	<ins>Efficiency based on location</ins>: The highest recorded efficiency in the area would be determined along with the company name and module type. The inputs would be location (state, zip code). The code would loop through the code to find data within the same zip code, if it exists, or in the state. The highest efficiency in the area would be determined and outputted along with the corresponding company and module type. This information would be useful to the purchaser and investor users.
 
