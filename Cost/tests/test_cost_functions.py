@@ -15,14 +15,27 @@ class TestCost(unittest.TestCase):
     """
     test cases
     """
+
+    # tests if efficiency column contains any missing data
+    def test_eff_missing_data(self):
+        """
+        Checks for missing data in efficiency column (indicted with -1)
+        """
+        missing_val = -1
+        df = pd.read_csv('tests/TTS_sample.csv')
+        if missing_val in df['mod_efficiency1']:
+            self.assertRaises(ValueError)
+        return
+
     # stepwise selection
+    # forward stepwise selection
     def test_one_shot_test_forward_stepwise(self):
         """
-        Forward stepwise selection
+        Forward stepwise selection: one shot test
         """
-        df = pd.read_csv('TTS_sample.csv')
-        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
+        df = pd.read_csv('tests/TTS_sample.csv')
+        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1']]
         y = df['totalInstalledCost___']
 
@@ -32,20 +45,24 @@ class TestCost(unittest.TestCase):
         return
 
     def test_forward_stepwise_input(self):
-        df = pd.read_csv('TTS_sample.csv')
-        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
+        """
+        Forward stepwise selection: Checks input type; only accepts int/float values
+        """
+        df = pd.read_csv('tests/TTS_sample.csv')
+        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1', 'totalInstalledCost___']]
 
         # check if string is present
         self.assertTrue(isinstance(x, (int, float)) for x in df)
         return
 
+    # backward stepwise selection
     def test_one_shot_test_backward_stepwise(self):
         """
-        Backward stepwise selection
+        Backward stepwise selection: one shot test
         """
-        df = pd.read_csv('TTS_sample.csv')
+        df = pd.read_csv('tests/TTS_sample.csv')
         X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
         'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1']]
@@ -58,24 +75,72 @@ class TestCost(unittest.TestCase):
 
     def test_backward_stepwise_input(self):
         """
-        Checks if strings are present in dataset
+        Backward stepwise selection: Checks input type; only accepts int/float values
         """
-        df = pd.read_csv('TTS_sample.csv')
-        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
+        df = pd.read_csv('tests/TTS_sample.csv')
+        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1', 'totalInstalledCost___']]
 
         self.assertTrue(isinstance(x, (int, float)) for x in df)
         return
 
+    # different values
+    def test_one_shot_test_different(self):
+        """
+        Different values: one shot test
+        """
+        alist = [1,3,5]
+        blist = [1,3,6]
+        self.assertTrue(different_values(alist, blist))
+
+        return
+
+    def test_pattern_test_different(self):
+        """
+        Different values: pattern test
+        """
+        alist = [1,3,5]
+        blist = [1,3,6]
+        diff_list = [5,6]
+
+        if np.allclose(different_values(alist, blist), diff_list):
+            print('Passed Pattern Test for Different Values')
+
+        return
+
+    # unique values
+    def test_one_shot_test_unique(self):
+        """
+        Unique values: one shot test
+        """
+        alist = [1,3,5]
+        blist = [1,3,6]
+        self.assertTrue(unique_values(alist, blist))
+
+        return
+
+    def test_pattern_test_unique(self):
+        """
+        Unique values: pattern test
+        """
+        alist = [1,3,5]
+        blist = [1,3,6]
+        diff_list = [1,3,5,6]
+
+        if np.allclose(unique_values(alist, blist), diff_list):
+            print('Passed Pattern Test for Unique Values')
+
+        return
+
     # random forest regressor
     def test_one_shot_rf(self):
-	"""
-	One shot test for random forest regressor
-	"""
-        df = pd.read_csv('TTS_sample.csv')
-        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
+        """
+        Random Forest Regressor: One shot test
+        """
+        df = pd.read_csv('tests/TTS_sample.csv')
+        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1']]
         y = df['totalInstalledCost___']
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.21, random_state=9, shuffle = True)
