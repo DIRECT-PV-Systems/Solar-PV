@@ -40,9 +40,10 @@ A parsed down database from the University of California-Berkely “Tracking the
     This component enables engineers working for power companies and installers to make informed decisons on which factors most greatly affect efficiency so as to determine which areas they should focus on in deployment of solar cell systems.
 
 2.  Cost analysis
-    This provides a brief overview of the associated expenses and income with implementing solar panels. The inputs would include the area (state/zip code) and available square footage. It would find the highest efficiency in the location and use that to calculate the estimated amount of electricity generation based on the approximate number of solar panels that would fit into the entered square footage. Using the average cost of electricity, the potential savings can be calculated. The manufacturing cost per square foot can be calculated by dividing the associated manufacturing cost with the highest efficiency in the area by the number of modules (or sq ft) and then multiplying by the inputted square footage (or number of modules). The outputs would be the predicted manufacturing/installation costs and the potential savings.
 
-    This use case if useful for all users who have some knowledge of python code or can use another employee to help them enalyze cost. The cost analysis will allow installers and power companies to make informed decisions on which systems have lower costs and which areas to focus on to lower cost and maintain sufficient performance.
+	This analysis will provide the most influential factors for determining the total installation cost and then use those features to create a regression model for predictions. The most influential factors will be determined through the results from stepwise selection and the strong correlations seen on heatmaps. Using the selected features, a random forest regressor model was used to predict the total installation cost.
+
+	This use case if useful for all users who have some knowledge of python code or can use another employee to help them analyze cost. The cost analysis will allow installers and power companies to make informed decisions on which systems have lower costs and which areas to focus on to lower cost and maintain sufficient performance. This component enables the purchasers use case. The input parameters include the different features that contribute to the total installation cost and the output parameters would be the predicted total installation cost.  
 
 #### 3.  Visualizations
    The visualization package consits of two components: Geocoding and Map Plotting
@@ -50,7 +51,7 @@ A parsed down database from the University of California-Berkely “Tracking the
    1. Geocoding:
    In order to plot the locations in the dataset, the city and state locations need to be converted to latitude and longitude coordinates. This program takes the entire Tracking the dataframe as an input which includes most importantly for this program, the city and state location of each datapoint. It uses a combinations of a custom python package, Geopy, and Nominatim to output a new dataframe with latitude and longitude in sepearte columns for each datapoint. A jupyter notebook walks the user through how to complete the geocoding. This makes plotting viusualizations in the next step possible.
 
-   2. Map Plotting
+   2. Map Plotting:
    A jupyter notebook is provided to the user to teach them how to plot visualizations using a sample dataset. This component takes a .csv file from the Tracking the Sun dataset as an input and outputs density heat maps and chropleth maps related to cost and efficiency. 
 
-   The visualizations in included in the jupyter notebook are most useful for users with limited to knowledge of python to get an overall idea of the costs and efficiencies based on geographic areas of the United States. This is helpful for the investor to decide which areas would be the best to invest in based areas with high efficiencies, low cost, and potential for expansion.
+   The visualizations included in the jupyter notebook are most useful for users with limited to knowledge of python to get an overall idea of the costs and efficiencies based on geographic areas of the United States. This is helpful for the investor to decide which areas would be the best to invest in based areas with high efficiencies, low cost, and potential for expansion.
