@@ -11,31 +11,37 @@ from sklearn.model_selection import train_test_split
 
 import unittest
 
+from cost_functions import forward_stepwise_selection
+from cost_functions import backward_stepwise_selection
+from cost_functions import different_values
+from cost_functions import unique_values
+from cost_functions import random_forest_reg
+
 class TestCost(unittest.TestCase):
     """
     test cases
     """
 
-    # tests if efficiency column contains any missing data
     def test_eff_missing_data(self):
         """
         Checks for missing data in efficiency column (indicted with -1)
         """
         missing_val = -1
-        df = pd.read_csv('tests/TTS_sample.csv')
+        df = pd.read_csv('TTS_sample.csv')
         if missing_val in df['mod_efficiency1']:
             self.assertRaises(ValueError)
         return
 
     # stepwise selection
+
     # forward stepwise selection
     def test_one_shot_test_forward_stepwise(self):
         """
         Forward stepwise selection: one shot test
         """
-        df = pd.read_csv('tests/TTS_sample.csv')
-        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
+        df = pd.read_csv('TTS_sample.csv')
+        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1']]
         y = df['totalInstalledCost___']
 
@@ -48,9 +54,9 @@ class TestCost(unittest.TestCase):
         """
         Forward stepwise selection: Checks input type; only accepts int/float values
         """
-        df = pd.read_csv('tests/TTS_sample.csv')
-        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
+        df = pd.read_csv('TTS_sample.csv')
+        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1', 'totalInstalledCost___']]
 
         # check if string is present
@@ -62,9 +68,9 @@ class TestCost(unittest.TestCase):
         """
         Backward stepwise selection: one shot test
         """
-        df = pd.read_csv('tests/TTS_sample.csv')
-        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
+        df = pd.read_csv('TTS_sample.csv')
+        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1']]
         y = df['totalInstalledCost___']
 
@@ -77,9 +83,9 @@ class TestCost(unittest.TestCase):
         """
         Backward stepwise selection: Checks input type; only accepts int/float values
         """
-        df = pd.read_csv('tests/TTS_sample.csv')
-        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
+        df = pd.read_csv('TTS_sample.csv')
+        df = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1', 'totalInstalledCost___']]
 
         self.assertTrue(isinstance(x, (int, float)) for x in df)
@@ -138,9 +144,9 @@ class TestCost(unittest.TestCase):
         """
         Random Forest Regressor: One shot test
         """
-        df = pd.read_csv('tests/TTS_sample.csv')
-        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1', 
-        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1', 
+        df = pd.read_csv('TTS_sample.csv')
+        X = df[['systemSizeInDCSTC_KW_', 'Up_FrontCashIncentive___', 'azimuth_1', 'tilt_1',
+        'mod_nameplate_capacity1', 'inverterQuantity_1', 'inv_outputcapacity1',
         'ILR', 'TotalModuleQty', 'latitude', 'longitude','mod_efficiency1']]
         y = df['totalInstalledCost___']
         X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.21, random_state=9, shuffle = True)
